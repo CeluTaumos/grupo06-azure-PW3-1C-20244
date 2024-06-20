@@ -17,7 +17,7 @@ namespace Azurecito.Logica.Servicios
         List<Foto> ObtenerFotosPendientesDeAprobacion();
         List<Usuario> ObtenerUsuariosEnBDD();
         Usuario ObtenerUsuarioEnBDD(string nombreUsuario, string password);
-        Usuario ObtenerUsuarioPorId(int id);
+        Usuario ObtenerUsuarioPorId(int? id);
         Foto ObtenerFotoPorId(int photoId);
         Task RechazarFotoAsync(int photoId);
     }
@@ -65,12 +65,12 @@ namespace Azurecito.Logica.Servicios
 
         public List<Foto> VerFotos()
         {
-            return _ctx.Fotos.ToList();
+            return _ctx.Fotos.Include(f => f.User).ToList();
         }
 
         public List<Foto> ObtenerFotosPendientesDeAprobacion()
         {
-            return _ctx.Fotos.Where(f => !f.EstaAprobada).ToList();
+            return _ctx.Fotos.Include(f => f.User).Where(f => !f.EstaAprobada).ToList();
         }
 
         public Usuario ObtenerUsuarioEnBDD(string nombreUsuario, string password)
@@ -86,14 +86,15 @@ namespace Azurecito.Logica.Servicios
             return _ctx.Usuarios.ToList();
         }
 
-        public Usuario ObtenerUsuarioPorId(int id)
+        public Usuario ObtenerUsuarioPorId(int? id)
         {
             return _ctx.Usuarios.FirstOrDefault(u => u.Id == id);
         }
 
+
         public Foto ObtenerFotoPorId(int photoId)
         {
-            return _ctx.Fotos.FirstOrDefault(f => f.Id == photoId);
+            return _ctx.Fotos.Include(f => f.User).FirstOrDefault(f => f.Id == photoId);
         }
 
         public async Task RechazarFotoAsync(int photoId)

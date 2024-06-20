@@ -2,7 +2,6 @@
 using Azurecito.Logica.Servicios;
 using Azurecito.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -40,7 +39,7 @@ namespace Azurecito.Web.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("SubirFoto");
+                    return RedirectToAction("SubirFoto", new { userId = usuario.Id });
                 }
             }
 
@@ -56,8 +55,9 @@ namespace Azurecito.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult SubirFoto()
+        public IActionResult SubirFoto(int userId)
         {
+            ViewBag.UserId = userId;
             return View();
         }
 
@@ -85,6 +85,13 @@ namespace Azurecito.Web.Controllers
         public IActionResult AprobarFotos()
         {
             var fotosPendientes = _fotoService.ObtenerFotosPendientesDeAprobacion();
+
+            // Asegurar que cada foto tenga un usuario no nulo
+            foreach (var foto in fotosPendientes)
+            {
+                foto.User = _fotoService.ObtenerUsuarioPorId(foto.UserId);
+            }
+
             return View(fotosPendientes);
         }
 

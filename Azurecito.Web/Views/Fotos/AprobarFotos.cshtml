@@ -18,13 +18,15 @@
         {
             <tr>
                 <td>@foto.Id</td>
-                <td>@foto.User.NombreUsuario</td>
+                <td>@(foto.User != null ? foto.User.NombreUsuario : "Usuario no encontrado")</td>
                 <td><img src="@foto.FotoUrl" alt="Foto" style="max-width: 200px;" /></td>
                 <td>
-                    <form asp-action="AprobarFoto" asp-route-photoId="@foto.Id" method="post">
+                    <form asp-action="AprobarFoto" method="post">
+                        <input type="hidden" name="photoId" value="@foto.Id" />
                         <button type="submit" class="btn btn-success">Aprobar</button>
                     </form>
-                    <form asp-action="RechazarFoto" asp-route-photoId="@foto.Id" method="post">
+                    <form asp-action="RechazarFoto" method="post">
+                        <input type="hidden" name="photoId" value="@foto.Id" />
                         <button type="submit" class="btn btn-danger">Rechazar</button>
                     </form>
                 </td>
