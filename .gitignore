@@ -1,0 +1,81 @@
+# Compiled object files
+*.o
+*.obj
+*.exe
+*.dll
+*.pdb
+*.app
+*.log
+*.vspscc
+*.vssscc
+
+# Directories
+bin/
+obj/
+.vscode/
+.vs/
+.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.csproj.user
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Entity Framework migrations
+Migrations/
+
+# Configuration files
+appsettings*.json
+
+# Rider directories
+.idea/
+
+# Logs
+*.log
+
+# Database
+*.mdf
+*.ldf
+
+# Local History
+.localhistory
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# Rider
+.idea/
+*.sln.iml
+
+# Temporary files
+*.tmp
+*.temp
+
+# Other
+*.vspscc
+*.vssscc
+._*
