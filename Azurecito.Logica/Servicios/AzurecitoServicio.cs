@@ -36,7 +36,7 @@ namespace Azurecito.Logica.Servicios
 
         public async Task<string> SubirFotoAsync(Stream photoStream, string fileName, int userId)
         {
-            var containerClient = _blobServiceClient.GetBlobContainerClient("photos");
+            var containerClient = _blobServiceClient.GetBlobContainerClient("fotitos");
             await containerClient.CreateIfNotExistsAsync();
             var blobClient = containerClient.GetBlobClient(fileName);
             await blobClient.UploadAsync(photoStream, true);
