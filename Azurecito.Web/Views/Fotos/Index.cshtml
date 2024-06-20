@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Azurecito.Data.Entidades.Foto>
+
+@{
+    ViewData["Title"] = "Fotos";
+}
+
+<h1>Fotos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Foto</th>
+            <th>Usuario</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var foto in Model)
+        {
+            <tr>
+                <td><img src="@foto.FotoUrl" alt="Foto" width="100" /></td>
+                <td>@foto.UserId</td>
+                <td>@(foto.EstaAprobada ? "Aprobada" : "Pendiente")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Fotos/SubirFoto" class="btn btn-primary">Subir Foto</a>
+
