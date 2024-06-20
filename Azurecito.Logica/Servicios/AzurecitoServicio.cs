@@ -1,6 +1,11 @@
-﻿using Azure.Storage.Blobs;
-using Azurecito.Data.Entidades;
+﻿using Azurecito.Data.Entidades;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Azure.Storage.Blobs;
 
 namespace Azurecito.Logica.Servicios
 {
@@ -11,11 +16,10 @@ namespace Azurecito.Logica.Servicios
         List<Foto> VerFotos();
         List<Foto> ObtenerFotosPendientesDeAprobacion();
         List<Usuario> ObtenerUsuariosEnBDD();
-       Usuario ObtenerUsuarioEnBDD(string nombreUsuario, string password);
+        Usuario ObtenerUsuarioEnBDD(string nombreUsuario, string password);
         Usuario ObtenerUsuarioPorId(int id);
         Foto ObtenerFotoPorId(int photoId);
         Task RechazarFotoAsync(int photoId);
-       
     }
 
     public class AzurecitoServicio : IFotoService
@@ -69,11 +73,8 @@ namespace Azurecito.Logica.Servicios
             return _ctx.Fotos.Where(f => !f.EstaAprobada).ToList();
         }
 
-    
-
         public Usuario ObtenerUsuarioEnBDD(string nombreUsuario, string password)
         {
-           
             var usuario = _ctx.Usuarios
                 .FirstOrDefault(u => u.NombreUsuario == nombreUsuario && u.Password == password);
 
@@ -92,16 +93,17 @@ namespace Azurecito.Logica.Servicios
 
         public Foto ObtenerFotoPorId(int photoId)
         {
-            return _ctx.Fotos.FirstOrDefault(f=>f.Id  == photoId);
+            return _ctx.Fotos.FirstOrDefault(f => f.Id == photoId);
         }
-    public async Task RechazarFotoAsync(int photoId)
-    {
-        var foto = await _ctx.Fotos.FindAsync(photoId);
-        if (foto != null)
+
+        public async Task RechazarFotoAsync(int photoId)
         {
-            _ctx.Fotos.Remove(foto); 
-            await _ctx.SaveChangesAsync();
+            var foto = await _ctx.Fotos.FindAsync(photoId);
+            if (foto != null)
+            {
+                _ctx.Fotos.Remove(foto);
+                await _ctx.SaveChangesAsync();
+            }
         }
-    }
     }
 }

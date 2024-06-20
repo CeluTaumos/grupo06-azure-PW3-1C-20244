@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Azurecito.Web.Controllers
@@ -18,6 +19,7 @@ namespace Azurecito.Web.Controllers
         {
             _fotoService = fotoService;
         }
+
         [HttpGet]
         public IActionResult IniciarSesion()
         {
@@ -45,6 +47,7 @@ namespace Azurecito.Web.Controllers
             ModelState.AddModelError(string.Empty, "Usuario no válido.");
             return View();
         }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -77,9 +80,6 @@ namespace Azurecito.Web.Controllers
 
             return RedirectToAction("Index");
         }
-
-
-      
 
         [HttpGet]
         public IActionResult AprobarFotos()
@@ -115,13 +115,6 @@ namespace Azurecito.Web.Controllers
 
             return RedirectToAction("AprobarFotos");
         }
-
-
-
-
-
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

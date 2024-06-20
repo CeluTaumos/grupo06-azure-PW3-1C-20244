@@ -1,16 +1,17 @@
-﻿@using System.Security.Claims
-@{
+﻿@{
     ViewData["Title"] = "Subir Foto";
-    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Obtener el ID del usuario autenticado
 }
 
 <h1>Subir Foto</h1>
 
 <form asp-action="SubirFoto" method="post" enctype="multipart/form-data">
     <div class="form-group">
+        <label for="userId">ID de Usuario:</label>
+        <input type="text" name="userId" class="form-control" />
+    </div>
+    <div class="form-group">
         <label for="file">Seleccionar Foto:</label>
         <input type="file" name="file" class="form-control" />
     </div>
-    <input type="hidden" name="userId" value="@userId" /> <!-- Campo oculto con el ID del usuario -->
     <button type="submit" class="btn btn-primary">Subir</button>
 </form>
