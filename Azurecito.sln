@@ -7,6 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azurecito.Web", "Azurecito.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azurecito.Data", "Azurecito.Data\Azurecito.Data.csproj", "{421302AD-9295-433C-B8B3-9BCA6F00AFE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azurecito.Logica", "Azurecito.Logica\Azurecito.Logica.csproj", "{148A79E4-B344-4F75-84C3-E373875B947C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{C878251D-E9D5-4E4B-8194-E86D0C17A245}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunctions", "AzureFunctions\AzureFunctions.csproj", "{1F8B1680-2BED-42E9-9B52-876E627188E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +30,14 @@ Global
 		{421302AD-9295-433C-B8B3-9BCA6F00AFE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{421302AD-9295-433C-B8B3-9BCA6F00AFE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{421302AD-9295-433C-B8B3-9BCA6F00AFE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{148A79E4-B344-4F75-84C3-E373875B947C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{148A79E4-B344-4F75-84C3-E373875B947C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{148A79E4-B344-4F75-84C3-E373875B947C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{148A79E4-B344-4F75-84C3-E373875B947C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F8B1680-2BED-42E9-9B52-876E627188E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F8B1680-2BED-42E9-9B52-876E627188E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F8B1680-2BED-42E9-9B52-876E627188E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F8B1680-2BED-42E9-9B52-876E627188E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

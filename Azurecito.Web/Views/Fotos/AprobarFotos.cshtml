@@ -1,0 +1,33 @@
+﻿@using Azurecito.Data.Entidades
+@model List<Foto>
+
+<h1>Fotos Pendientes de Aprobación</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Foto</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var foto in Model)
+        {
+            <tr>
+                <td>@foto.Id</td>
+                <td>@foto.User.NombreUsuario</td>
+                <td><img src="@foto.FotoUrl" alt="Foto" style="max-width: 200px;" /></td>
+                <td>
+                    <form asp-action="AprobarFoto" asp-route-photoId="@foto.Id" method="post">
+                        <button type="submit" class="btn btn-success">Aprobar</button>
+                    </form>
+                    <form asp-action="RechazarFoto" asp-route-photoId="@foto.Id" method="post">
+                        <button type="submit" class="btn btn-danger">Rechazar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
