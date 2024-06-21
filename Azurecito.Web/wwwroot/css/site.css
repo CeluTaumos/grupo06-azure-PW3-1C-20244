@@ -1,22 +1,183 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
 body {
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    background-image: conic-gradient(from 80deg at -3% 0%, rgba(255, 255, 255, 1) 0%, rgb(14, 165, 233) 50%, rgb(14, 165, 233) 100%);
+    color: #fff;
 }
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* Estilos personalizados para los botones */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+footer {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+    footer .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+footer p {
+    flex: 1 1 100%;
+    margin: 0;
+    padding: 5px 0;
+}
+
+footer ul {
+    display: flex;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+    footer ul li {
+        flex: 1 1 50%; /* Dos columnas */
+        padding: 5px;
+        margin: 0;
+    }
+
+/* Estilos personalizados para el input de archivo */
+.custom-file-input {
+    cursor: pointer;
+}
+
+    .custom-file-input:lang(en) ~ .custom-file-label::after {
+        content: "Elegir archivo...";
+    }
+
+.custom-file-label::after {
+    content: "Elegir archivo...";
+    background-color: #007bff;
+    color: white;
+    padding: 0.375rem 0.75rem;
+    margin-left: 10px;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.custom-file-label {
+    border-radius: 0.25rem;
+}
+.drag-container {
+    height: 100vh;
+}
+
+.drag-image {
+    border: 1px dashed #fff;
+    height: 300px;
+    width: 350px;
+    border-radius: 5px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+    .drag-image.active {
+        border: 2px solid #fff;
+    }
+
+    .drag-image .icon {
+        font-size: 30px;
+        color: #fff;
+    }
+
+    .drag-image h6 {
+        font-size: 20px;
+        font-weight: 300;
+        color: #fff;
+    }
+
+    .drag-image span {
+        font-size: 14px;
+        font-weight: 300;
+        color: #fff;
+        margin: 10px 0 15px 0;
+    }
+
+    .drag-image button {
+        padding: 10px 25px;
+        font-size: 14px;
+        font-weight: 300;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.5s;
+    }
+
+        .drag-image button:hover {
+            background-color: #fff;
+            color: red;
+        }
+
+    .drag-image img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }

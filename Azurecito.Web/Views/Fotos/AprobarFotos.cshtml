@@ -1,10 +1,9 @@
 ﻿@using Azurecito.Data.Entidades
-
 @model List<Foto>
 
 <h1>Fotos Pendientes de Aprobación</h1>
 
-<table class="table">
+<table class="table  mb-3">
     <thead>
         <tr>
             <th>ID</th>
@@ -22,12 +21,12 @@
                 <td><img src="@foto.FotoUrl" alt="Foto" style="max-width: 200px;" /></td>
                 <td>
                     <form asp-action="AprobarFoto" method="post">
-                        <input type="hidden" name="photoId" value="@foto.Id" />
-                        <button type="submit" class="btn btn-success">Aprobar</button>
+                        <input type="hidden" name="photoId" value="@foto.Id"  />
+                        <button type="submit" class="btn btn-success  mb-3">Aprobar</button>
                     </form>
                     <form asp-action="RechazarFoto" method="post">
                         <input type="hidden" name="photoId" value="@foto.Id" />
-                        <button type="submit" class="btn btn-danger">Rechazar</button>
+                        <button type="submit" class="btn btn-danger  mb-3">Rechazar</button>
                     </form>
                 </td>
             </tr>
