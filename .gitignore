@@ -79,3 +79,25 @@ $RECYCLE.BIN/
 *.vspscc
 *.vssscc
 ._*
+# Ignore compiled files
+*.dll
+*.exe
+
+# Ignore NuGet packages folder
+packages/
+
+# Ignore Visual Studio files
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Ignore JetBrains Rider files
+.idea/
+
+# Ignore publish profiles
+Azurecito.Web/Properties/PublishProfiles/
+
+# Ignore temporary uploads
+Azurecito.Web/TempUploads/
+Azurecito.Web/wwwroot/TempUploadRoot/
