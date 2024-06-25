@@ -1,0 +1,24 @@
+# Ignorar archivos compilados
+*.dll
+*.exe
+
+# Ignorar directorios de paquetes NuGet
+/packages/
+
+# Ignorar archivos de configuración local de Visual Studio
+/.vs/
+
+# Ignorar archivos de configuración local de JetBrains Rider
+.idea/
+
+# Ignorar archivos de configuración específicos de la aplicación web
+/Azurecito.Web/appsettings.json
+/Azurecito.Web/appsettings.Development.json
+
+# Ignorar archivos de build y compilación
+/Azurecito.Data/bin/
+/Azurecito.Data/obj/
+/Azurecito.Logica/bin/
+/Azurecito.Logica/obj/
+/Azurecito.Web/bin/
+/Azurecito.Web/obj/
