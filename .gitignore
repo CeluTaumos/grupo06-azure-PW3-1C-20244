@@ -1,91 +1,3 @@
-# Compiled object files
-*.o
-*.obj
-*.exe
-*.dll
-*.pdb
-*.app
-*.log
-*.vspscc
-*.vssscc
-
-# Directories
-bin/
-obj/
-.vscode/
-.vs/
-.suo
-*.user
-*.userosscache
-*.sln.docstates
-*.csproj.user
-
-# ASP.NET Scaffolding
-ScaffoldingReadMe.txt
-
-# Entity Framework migrations
-Migrations/
-
-# Configuration files
-appsettings*.json
-
-# Rider directories
-.idea/
-
-# Logs
-*.log
-
-# Database
-*.mdf
-*.ldf
-
-# Local History
-.localhistory
-
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# VS Code directories
-.vscode/
-
-# JetBrains Rider
-.idea/
-*.sln.iml
-
-# User-specific files
-*.rsuser
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-*.rsuser
-
-# Rider
-.idea/
-*.sln.iml
-
-# Temporary files
-*.tmp
-*.temp
-
-# Other
-*.vspscc
-*.vssscc
-._*
-# Ignore compiled files
-*.dll
-*.exe
-
-# Ignore NuGet packages folder
-packages/
-
 # Ignore Visual Studio files
 .vs/
 *.suo
@@ -101,3 +13,10 @@ Azurecito.Web/Properties/PublishProfiles/
 # Ignore temporary uploads
 Azurecito.Web/TempUploads/
 Azurecito.Web/wwwroot/TempUploadRoot/
+
+# Ignore specific files
+Azurecito.Web/Views/Shared/Error.cshtml
+Azurecito.Web/Models/SesionLayoutViewModel.cs
+Azurecito.Web/Views/Fotos/Error.cshtml
+Azurecito.Web/Views/Fotos/Ver.cshtml
+
