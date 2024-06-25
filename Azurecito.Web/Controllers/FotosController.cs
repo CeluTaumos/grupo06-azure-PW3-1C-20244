@@ -2,21 +2,19 @@
 using Azurecito.Logica.Servicios;
 using Azurecito.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Azurecito.Web.Controllers
 {
     public class FotosController : Controller
     {
         private readonly IFotoService _fotoService;
-
-        public FotosController(IFotoService fotoService)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public FotosController(IFotoService fotoService, IWebHostEnvironment webHostEnvironment)
         {
             _fotoService = fotoService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -32,13 +30,13 @@ namespace Azurecito.Web.Controllers
 
             if (usuario != null)
             {
-                // Verificar si el usuario es admin
                 if (usuario.EsAdmin)
                 {
                     return RedirectToAction("AprobarFotos");
                 }
                 else
                 {
+                    TempData["UserId"] = usuario.Id;
                     return RedirectToAction("SubirFoto", new { userId = usuario.Id });
                 }
             }
@@ -48,15 +46,14 @@ namespace Azurecito.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
-        {
-            var fotos = _fotoService.VerFotos();
-            return View(fotos);
-        }
-
-        [HttpGet]
         public IActionResult SubirFoto(int userId)
         {
+            if (userId == 0)
+            {
+                return RedirectToAction("IniciarSesion");
+            }
+
+            TempData["UserId"] = userId;
             ViewBag.UserId = userId;
             return View();
         }
@@ -64,29 +61,40 @@ namespace Azurecito.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> SubirFoto(IFormFile file, int userId)
         {
-            var usuario = _fotoService.ObtenerUsuarioPorId(userId);
-
-            if (usuario != null && file != null && file.Length > 0)
+            if (file != null && file.Length > 0)
             {
-                using var stream = file.OpenReadStream();
-                var fileName = Path.GetFileName(file.FileName);
-                await _fotoService.SubirFotoAsync(stream, fileName, userId);
+                string root = Path.Combine("wwwroot", "TempUploadRoot");
+                var result = await _fotoService.SubirFotoTemporalAsync(file, userId, root);
             }
             else
             {
                 ModelState.AddModelError(string.Empty, "Usuario no válido o falta la foto.");
+                ViewBag.UserId = userId;
                 return View();
             }
 
-            return RedirectToAction("Index");
+            TempData["UserId"] = userId;
+            return RedirectToAction("Index", new { id = userId });
         }
+
+        [HttpGet]
+        public IActionResult Index(int id)
+        {
+            SesionLayoutViewModel viewModel = new();
+            Usuario usuario = _fotoService.ObtenerUsuarioPorId(id);
+            var fotos = _fotoService.VerFotos(usuario.Id);
+            viewModel.Fotos = fotos;
+            viewModel.Usuario = usuario;
+            return View(viewModel);
+        }
+
 
         [HttpGet]
         public IActionResult AprobarFotos()
         {
             var fotosPendientes = _fotoService.ObtenerFotosPendientesDeAprobacion();
 
-            // Asegurar que cada foto tenga un usuario no nulo
+           
             foreach (var foto in fotosPendientes)
             {
                 foto.User = _fotoService.ObtenerUsuarioPorId(foto.UserId);
@@ -104,9 +112,28 @@ namespace Azurecito.Web.Controllers
                 return NotFound();
             }
 
-            await _fotoService.AprobarFotoAsync(photoId);
+            try
+            {
+
+                var uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "TempUploadRoot");
+
+                await _fotoService.AprobarFotoAsync(photoId, uploadPath);
+            }
+            catch (Exception ex)
+            {
+                
+                ModelState.AddModelError(string.Empty, "Error al aprobar la foto: " + ex.Message);
+                return View("AprobarFotos", _fotoService.ObtenerFotosPendientesDeAprobacion());
+            }
 
             return RedirectToAction("AprobarFotos");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Ver()
+        {
+            var fotosUrls = await _fotoService.ObtenerTodasLasFotosDeBlobAsync();
+            return View(fotosUrls);
         }
 
         [HttpPost]
@@ -130,3 +157,4 @@ namespace Azurecito.Web.Controllers
         }
     }
 }
+

@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Azurecito.Logica\Azurecito.Logica.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TempUploads\" />
+  </ItemGroup>
+
 </Project>

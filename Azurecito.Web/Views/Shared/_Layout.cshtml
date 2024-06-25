@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Fotos" asp-action="Index">Azurecito</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Fotos" asp-action="Ver">Azurecito</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,8 +22,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Fotos" asp-action="IniciarSesion">Salir</a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Fotos" asp-action="SubirFoto">Subir Foto</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Fotos" asp-action="Ver">Ver Fotos</a>
                         </li>
                     </ul>
                 </div>
@@ -35,11 +36,11 @@
             @RenderBody()
         </main>
     </div>
-    <footer >
-        <div class="container">
-            <div class="footer-content">
-                <p>Programación Web III -- GRUPO 06</p>
-               
+    <footer>
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="footer-content text-center">
+                <p>Programación Web III -- GRUPO 06 -- AZURE</p>
+
             </div>
         </div>
     </footer>
@@ -50,4 +51,4 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-</html>
+</html>

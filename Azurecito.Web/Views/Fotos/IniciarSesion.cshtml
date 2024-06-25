@@ -4,10 +4,9 @@
     ViewData["Title"] = "Iniciar Sesión";
 }
 
-<h1>Iniciar Sesión</h1>
-
-<form asp-action="IniciarSesion" method="post">
-    <div class="form-group  mb-3">
+<form asp-action="IniciarSesion" class="container d-flex flex-column justify-content-center align-items-center " style="height:70vh" method="post">
+    <h1>Iniciar Sesión</h1>
+    <div class="form-group mt-4 mb-2">
         <label for="nombreUsuario">Nombre de Usuario:</label>
         <input type="text" id="nombreUsuario" name="nombreUsuario" class="form-control  mb-3" />
     </div>
@@ -15,5 +14,6 @@
         <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password" class="form-control  mb-3" />
     </div>
-    <button type="submit" class="btn btn-primary  mb-3">Iniciar Sesión</button>
+    <button type="submit" class="btn btn-primary mt-2 mb-3">Iniciar Sesión</button>
 </form>
+

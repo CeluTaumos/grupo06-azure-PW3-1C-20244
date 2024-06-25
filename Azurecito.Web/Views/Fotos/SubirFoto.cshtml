@@ -1,21 +1,90 @@
-﻿@{
+﻿@model int
+@{
     ViewData["Title"] = "Subir Foto";
 }
 
 <h1>Subir Foto</h1>
 
-@if (ViewBag.UserId != null)
-{
-    <p>Su ID de usuario es: @ViewBag.UserId</p>
-}
+<body>
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="height:70vh;">
+        <div class="drag-image mt-5 position-relative" id="dragArea">
+            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+            <h6>Arrastre y suelte la imagen</h6>
+            <span>O</span>
+            <button id="browseButton">Buscar Imagen</button>
+            <input type="file" id="fileInput" hidden>
+            <img id="previewImage" class="position-absolute" src="#" alt="Preview Image" style="display: none; max-width: 100%; max-height: 300px;">
+        </div>
 
-
-
-<form asp-action="SubirFoto" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="file">Seleccionar Foto:</label>
-        <input type="file" name="file" class="form-control" />
+        <button class="btn btn-danger mt-4" id="confirmButton" style="display: none;">Confirmar Archivo</button>
+        <input type="hidden" id="userId" value="@ViewBag.UserId" />
     </div>
-    <input type="hidden" name="userId" value="@ViewBag.UserId" />
-    <button type="submit" class="btn btn-primary">Subir</button>
-</form>
+    <script>
+        let file = null;
+
+        document.getElementById("dragArea").addEventListener("dragover", (e) => {
+            e.preventDefault();
+        });
+
+        document.getElementById("dragArea").addEventListener("drop", (e) => {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            validarYMostrarImagen(file);
+        });
+
+        document.getElementById("fileInput").addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            validarYMostrarImagen(file);
+        });
+
+        function validarYMostrarImagen(file) {
+            if (file) {
+                const fileType = file.type;
+                const validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+                if (validExtensions.includes(fileType)) {
+                    document.getElementById("confirmButton").style.display = "block";
+                    document.getElementById("previewImage").style.display = "block";
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        document.getElementById("previewImage").src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Este no es un archivo de imagen válido (JPEG, JPG, PNG).");
+                }
+            }
+        }
+
+        document.getElementById("confirmButton").addEventListener("click", async () => {
+            const file = document.getElementById("fileInput").files[0];
+            const userId = document.getElementById("userId").value;
+            if (file) {
+                const formData = new FormData();
+                formData.append("file", file);
+                formData.append("userId", userId);
+
+                try {
+                    const response = await fetch("/Fotos/SubirFoto", {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        alert("Archivo subido con éxito");
+                        window.location.href = "/Fotos/Index?id=" + userId;
+                    } else {
+                        console.error("Error al subir el archivo");
+                    }
+                } catch (error) {
+                    console.error("Error al subir el archivo:", error);
+                }
+            } else {
+                console.error("No hay archivo para subir");
+            }
+        });
+
+        document.getElementById("browseButton").addEventListener("click", () => {
+            document.getElementById("fileInput").click();
+        });
+    </script>
+</body>

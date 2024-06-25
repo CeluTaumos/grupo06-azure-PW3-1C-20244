@@ -2,13 +2,17 @@
 @model List<Foto>
 
 <h1>Fotos Pendientes de Aprobación</h1>
+<p>
+    Querido Señor admin, acá usted puede elegir qué archivos se van a subir y cuáles no.
+    Sólo debe tomar esa pequeña decisión, Azure se encarga del resto
+</p>
 
-<table class="table  mb-3">
+<table class="table mb-3">
     <thead>
         <tr>
             <th>ID</th>
             <th>Usuario</th>
-            <th>Foto</th>
+            <th>URL de la Foto</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -18,18 +22,19 @@
             <tr>
                 <td>@foto.Id</td>
                 <td>@(foto.User != null ? foto.User.NombreUsuario : "Usuario no encontrado")</td>
-                <td><img src="@foto.FotoUrl" alt="Foto" style="max-width: 200px;" /></td>
+                <td>@foto.FotoUrl</td>
                 <td>
                     <form asp-action="AprobarFoto" method="post">
-                        <input type="hidden" name="photoId" value="@foto.Id"  />
-                        <button type="submit" class="btn btn-success  mb-3">Aprobar</button>
+                        <input type="hidden" name="photoId" value="@foto.Id" />
+                        <button type="submit" class="btn btn-success mb-3">Aprobar</button>
                     </form>
                     <form asp-action="RechazarFoto" method="post">
                         <input type="hidden" name="photoId" value="@foto.Id" />
-                        <button type="submit" class="btn btn-danger  mb-3">Rechazar</button>
+                        <button type="submit" class="btn btn-danger mb-3">Rechazar</button>
                     </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+

@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Azurecito.Data.Entidades.Foto>
-
+﻿
+@model SesionLayoutViewModel;
 @{
     ViewData["Title"] = "Fotos";
 }
@@ -9,13 +9,13 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Foto</th>
+            <th>URL de la Foto</th>
             <th>Usuario</th>
             <th>Estado</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var foto in Model)
+        @foreach (var foto in Model.Fotos)
         {
             <tr>
                 <td><img src="@foto.FotoUrl" alt="Foto" width="100" /></td>
@@ -26,5 +26,5 @@
     </tbody>
 </table>
 
-<a href="/Fotos/SubirFoto" class="btn btn-primary">Subir Foto</a>
+<a href="/Fotos/SubirFoto?userId=@Model.Usuario.Id" class="btn btn-primary">Subir Foto</a>
 
